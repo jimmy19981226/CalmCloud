@@ -1,10 +1,13 @@
 package com.example.calmcloud
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calmcloud.subpage.MoodTrackingActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +18,14 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        //Create button
+        val moodTrackingButton = findViewById<LinearLayout>(R.id.moodTrackingLayout)
+
+        //Add listener to button to start new activity
+        moodTrackingButton.setOnClickListener {
+            startActivity(Intent(this, MoodTrackingActivity::class.java))
         }
     }
 }
