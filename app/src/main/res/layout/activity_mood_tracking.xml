@@ -62,12 +62,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/happy_icon" />
+                android:src="@drawable/icon_mood_happy" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,12 +85,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/thankful_icon" />
+                android:src="@drawable/icon_mood_thankful" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,12 +108,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/energetic_icon" />
+                android:src="@drawable/icon_mood_energetic" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -131,12 +131,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/calm_icon" />
+                android:src="@drawable/icon_mood_calm" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,12 +154,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/indifferent_icon" />
+                android:src="@drawable/icon_mood_indifferent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -177,12 +177,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/tired_icon" />
+                android:src="@drawable/icon_mood_tired" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -200,12 +200,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/sad_icon" />
+                android:src="@drawable/icon_mood_sad" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -223,12 +223,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/anxious_icon" />
+                android:src="@drawable/icon_mood_anxious" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,12 +246,12 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/rounded_background">
+            android:background="@drawable/icon_rounded_background">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/angry_icon" />
+                android:src="@drawable/icon_mood_angry" />
 
             <TextView
                 android:layout_width="wrap_content"

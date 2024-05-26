@@ -2,7 +2,7 @@ package com.example.calmcloud
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,11 +21,30 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Create button
-        val moodTrackingButton = findViewById<LinearLayout>(R.id.moodTrackingLayout)
+        val moodTrackingButton: ImageButton = findViewById(R.id.moodTrackingButton)
+        val stressLevelsButton: ImageButton = findViewById(R.id.stressLevelsButton)
+        val sleepPatternsButton: ImageButton = findViewById(R.id.sleepPatternsButton)
+        val dataVisualizationButton: ImageButton = findViewById(R.id.dataVisualizationButton)
 
         //Add listener to button to start new activity
         moodTrackingButton.setOnClickListener {
-            startActivity(Intent(this, MoodTrackingActivity::class.java))
+            val intent = Intent(this, MoodTrackingActivity::class.java)
+            startActivity(intent)
         }
+
+//        stressLevelsButton.setOnClickListener {
+//            val intent = Intent(this, StressLevelsActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        sleepPatternsButton.setOnClickListener {
+//            val intent = Intent(this, SleepPatternsActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        dataVisualizationButton.setOnClickListener {
+//            val intent = Intent(this, DataVisualizationActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }

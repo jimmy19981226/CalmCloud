@@ -28,23 +28,27 @@
     <LinearLayout
         android:id="@+id/moodTrackingLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintTop_toBottomOf="@id/appName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/stressLevelsLayout"
         app:layout_constraintWidth_percent="0.4"
-        app:layout_constraintHeight_percent="0.3"
         android:layout_margin="16dp">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/moodTrackingButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/mood_tracking_icon" />
+            android:src="@drawable/icon_main_mood_tracking_icon"
+            android:background="@drawable/button_selector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="Mood Tracking" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,23 +63,27 @@
     <LinearLayout
         android:id="@+id/stressLevelsLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintTop_toBottomOf="@id/appName"
         app:layout_constraintStart_toEndOf="@+id/moodTrackingLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.4"
-        app:layout_constraintHeight_percent="0.3"
         android:layout_margin="16dp">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/stressLevelsButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/stress_levels_icon" />
+            android:src="@drawable/icon_main_stress_levels_icon"
+            android:background="@drawable/button_selector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="Stress Levels" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,23 +98,27 @@
     <LinearLayout
         android:id="@+id/sleepPatternsLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintTop_toBottomOf="@+id/moodTrackingLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dataVisualizationLayout"
         app:layout_constraintWidth_percent="0.4"
-        app:layout_constraintHeight_percent="0.3"
         android:layout_margin="16dp">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/sleepPatternsButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/sleep_patterns_icon" />
+            android:src="@drawable/icon_main_sleep_patterns_icon"
+            android:background="@drawable/button_selector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="Sleep Patterns" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -121,23 +133,27 @@
     <LinearLayout
         android:id="@+id/dataVisualizationLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintTop_toBottomOf="@+id/stressLevelsLayout"
         app:layout_constraintStart_toEndOf="@+id/sleepPatternsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.4"
-        app:layout_constraintHeight_percent="0.3"
         android:layout_margin="16dp">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/dataVisualizationButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/data_visualization_icon" />
+            android:src="@drawable/icon_main_data_visualization_icon"
+            android:background="@drawable/button_selector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="Data Visualization" />
 
         <TextView
             android:layout_width="wrap_content"

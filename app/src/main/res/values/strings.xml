@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CalmCloud</string>
+    <string name="mood_tracking">Mood Tracking</string>
+    <string name="stress_levels">Stress Levels</string>
+    <string name="sleep_patterns">Sleep Patterns</string>
+    <string name="data_visualization">Data Visualization</string>
 </resources>
