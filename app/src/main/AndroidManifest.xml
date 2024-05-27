@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CalmCloud"
         tools:targetApi="31">
         <activity
+            android:name=".subpage.SleepPatternsActivity"
+            android:exported="false" />
+        <activity
             android:name=".subpage.StressLevelsActivity"
             android:exported="false" />
         <activity
