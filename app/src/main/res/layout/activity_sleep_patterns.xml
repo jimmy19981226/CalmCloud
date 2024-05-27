@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
         android:text="Sleep Duration"
         android:textColor="@android:color/black"
@@ -54,17 +54,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/question" />
 
-    <EditText
-        android:id="@+id/sleepDuration"
+    <Spinner
+        android:id="@+id/startTimeSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:hint="10:00pm - 8:00am"
-        android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/sleepDurationLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/endTimeSpinner"
         android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:id="@+id/endTimeSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/sleepDurationLabel"
+        app:layout_constraintStart_toEndOf="@id/startTimeSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp" />
 
@@ -75,25 +85,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
         android:text="Sleep Quality"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.007"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sleepDuration" />
+        app:layout_constraintTop_toBottomOf="@id/startTimeSpinner" />
 
     <RatingBar
         android:id="@+id/sleepQuality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:numStars="5"
         android:stepSize="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sleepQualityLabel" />
 
@@ -104,13 +114,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
         android:text="Sleep Factors (What affected your sleep?)"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.039"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sleepQuality" />
 
@@ -119,7 +129,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:background="#FFFFFF"
         android:hint="Temperature/Caffeine/Noise"
@@ -132,6 +142,7 @@
     <!-- Save Button -->
 
     <!-- Reset All Button -->
+
     <Button
         android:id="@+id/saveButton"
         android:layout_width="0dp"
