@@ -62,12 +62,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/happyButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_happy" />
+                android:src="@drawable/icon_mood_happy"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Happy" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,12 +90,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/thankfulButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_thankful" />
+                android:src="@drawable/icon_mood_thankful"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Thankful" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,12 +118,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/energeticButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_energetic" />
+                android:src="@drawable/icon_mood_energetic"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Energetic" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -131,12 +146,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/calmButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_calm" />
+                android:src="@drawable/icon_mood_calm"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Calm" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,12 +174,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/indifferentButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_indifferent" />
+                android:src="@drawable/icon_mood_indifferent"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Indifferent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -177,12 +202,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/tiredButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_tired" />
+                android:src="@drawable/icon_mood_tired"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Tired" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -200,12 +230,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/sadButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_sad" />
+                android:src="@drawable/icon_mood_sad"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Sad" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -223,12 +258,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/anxiousButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_anxious" />
+                android:src="@drawable/icon_mood_anxious"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Anxious" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,12 +286,17 @@
             android:gravity="center"
             android:padding="16dp"
             android:layout_margin="8dp"
-            android:background="@drawable/icon_rounded_background">
+            android:background="@drawable/xml_icon_rounded_background">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/angryButton"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/icon_mood_angry" />
+                android:src="@drawable/icon_mood_angry"
+                android:background="@drawable/xml_button_selector"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:contentDescription="Angry" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -45,7 +45,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/icon_main_mood_tracking_icon"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/xml_button_selector"
             android:padding="16dp"
             android:scaleType="fitCenter"
             android:contentDescription="Mood Tracking" />
@@ -80,7 +80,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/icon_main_stress_levels_icon"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/xml_button_selector"
             android:padding="16dp"
             android:scaleType="fitCenter"
             android:contentDescription="Stress Levels" />
@@ -115,7 +115,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/icon_main_sleep_patterns_icon"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/xml_button_selector"
             android:padding="16dp"
             android:scaleType="fitCenter"
             android:contentDescription="Sleep Patterns" />
@@ -150,7 +150,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/icon_main_data_visualization_icon"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/xml_button_selector"
             android:padding="16dp"
             android:scaleType="fitCenter"
             android:contentDescription="Data Visualization" />
