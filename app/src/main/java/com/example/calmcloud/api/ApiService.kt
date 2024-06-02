@@ -3,12 +3,19 @@ package com.example.calmcloud.api
 import com.example.calmcloud.entity.Mood
 import com.example.calmcloud.entity.Sleep
 import com.example.calmcloud.entity.StressLevel
+import com.example.calmcloud.entity.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
+
+    @POST("login")
+    fun loginUser(@Body user: User): Call<User>
+
+    @POST("register")
+    fun registerUser(@Body user: User): Call<User>
 
     @GET("moods")
     fun getMoods(): Call<List<Mood>>

@@ -8,7 +8,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.calmcloud.subpage.MoodTrackingActivity
+import com.example.calmcloud.user.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -26,7 +26,8 @@ class SplashActivity : AppCompatActivity() {
 
         // Navigate to the main activity after the splash duration
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()
         }, splashDuration)
     }
