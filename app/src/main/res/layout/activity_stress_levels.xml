@@ -54,6 +54,7 @@
         android:layout_marginBottom="16dp">
 
         <RadioButton
+            android:id="@+id/noStress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No Stress: 😌"
@@ -62,6 +63,7 @@
             android:padding="8dp" />
 
         <RadioButton
+            android:id="@+id/veryLowStress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Very Low Stress: 🙂"
@@ -70,6 +72,7 @@
             android:padding="8dp" />
 
         <RadioButton
+            android:id="@+id/lowStress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Low Stress: 😐"
@@ -78,6 +81,7 @@
             android:padding="8dp" />
 
         <RadioButton
+            android:id="@+id/moderateStress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Moderate Stress: 😕"
@@ -86,6 +90,7 @@
             android:padding="8dp" />
 
         <RadioButton
+            android:id="@+id/highStress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="High Stress: 😟"
@@ -94,6 +99,7 @@
             android:padding="8dp" />
 
         <RadioButton
+            android:id="@+id/veryHighStress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Very High Stress: 😢"
@@ -102,6 +108,7 @@
             android:padding="8dp" />
 
         <RadioButton
+            android:id="@+id/extremeStress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Extreme Stress: 😫"
