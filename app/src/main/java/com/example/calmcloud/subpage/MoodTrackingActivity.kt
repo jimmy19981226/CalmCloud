@@ -49,7 +49,7 @@ class MoodTrackingActivity : AppCompatActivity() {
             button.setOnClickListener { toggleMoodSelection(button) }
         }
 
-        findViewById<Button>(R.id.saveButton).setOnClickListener { saveSelections() }
+        findViewById<Button>(R.id.saveButton).setOnClickListener { checkAndSaveSelections() }
         findViewById<Button>(R.id.resetButton).setOnClickListener { resetAllSelections() }
     }
 
@@ -68,8 +68,33 @@ class MoodTrackingActivity : AppCompatActivity() {
         moodButtons.forEach { it.alpha = 1.0f }
     }
 
-    private fun saveSelections() {
+    private fun checkAndSaveSelections() {
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+
+        // Check if the user has already submitted a mood for today
+        RetrofitClient.api.getMoods().enqueue(object : Callback<List<Mood>> {
+            override fun onResponse(call: Call<List<Mood>>, response: Response<List<Mood>>) {
+                if (response.isSuccessful) {
+                    val moods = response.body() ?: emptyList()
+                    val hasSubmittedToday = moods.any { it.date == date }
+
+                    if (hasSubmittedToday) {
+                        Toast.makeText(this@MoodTrackingActivity, "You have already submitted your mood for today.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        saveSelections(date)
+                    }
+                } else {
+                    Toast.makeText(this@MoodTrackingActivity, "Failed to check mood submission status.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Mood>>, t: Throwable) {
+                Toast.makeText(this@MoodTrackingActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun saveSelections(date: String) {
         val savedMoods = mutableListOf<Mood>()
         selectedMoods.forEach { id ->
             val moodType = when (id) {
