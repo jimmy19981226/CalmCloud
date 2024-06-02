@@ -91,7 +91,7 @@ class MoodTrackingActivity : AppCompatActivity() {
             RetrofitClient.api.createMood(mood).enqueue(object : Callback<Mood> {
                 override fun onResponse(call: Call<Mood>, response: Response<Mood>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(this@MoodTrackingActivity, "Mood saved successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MoodTrackingActivity, "Mood data saved successfully", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this@MoodTrackingActivity, "Failed to save mood", Toast.LENGTH_SHORT).show()
                     }

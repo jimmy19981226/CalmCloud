@@ -12,7 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calmcloud.R
+import com.example.calmcloud.api.RetrofitClient
 import com.example.calmcloud.entity.Sleep
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -88,13 +92,22 @@ class SleepPatternsActivity : AppCompatActivity() {
 
         if (startTime.isNotBlank() && endTime.isNotBlank() && factors.isNotBlank()) {
             val sleep = Sleep(UUID.randomUUID().toString(), date, startTime, endTime, quality, factors)
-            // Save the sleep object to your database or backend here
-            // Example: database.saveSleep(sleep)
 
-            val message = "Saved Sleep Data:\nDate: ${sleep.date}\nStart: ${sleep.sleepDurationStart}\nEnd: ${sleep.sleepDurationEnd}\nQuality: ${sleep.sleepQuality}\nFactors: ${sleep.sleepFactors}"
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            // Save the sleep object to your database or backend here using Retrofit
+            RetrofitClient.api.createSleepData(sleep).enqueue(object : Callback<Sleep> {
+                override fun onResponse(call: Call<Sleep>, response: Response<Sleep>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@SleepPatternsActivity, "Sleep data saved successfully", Toast.LENGTH_SHORT).show()
+                        resetAllFields()
+                    } else {
+                        Toast.makeText(this@SleepPatternsActivity, "Failed to save sleep data", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-            resetAllFields()
+                override fun onFailure(call: Call<Sleep>, t: Throwable) {
+                    Toast.makeText(this@SleepPatternsActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
         } else {
             Toast.makeText(this, "Please fill out all fields to save the data.", Toast.LENGTH_SHORT).show()
         }
