@@ -8,8 +8,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.calmcloud.R
 import android.widget.Button
 import android.widget.ImageButton
+import com.example.calmcloud.api.RetrofitClient
 import com.example.calmcloud.entity.Mood
 import com.example.calmcloud.entity.MoodType
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -65,7 +69,7 @@ class MoodTrackingActivity : AppCompatActivity() {
     }
 
     private fun saveSelections() {
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
         val savedMoods = mutableListOf<Mood>()
         selectedMoods.forEach { id ->
             val moodType = when (id) {
@@ -82,17 +86,30 @@ class MoodTrackingActivity : AppCompatActivity() {
             }
             val mood = Mood(UUID.randomUUID().toString(), date, moodType)
             savedMoods.add(mood)
-            // Save the mood object to your database or backend here
-            // Example: database.saveMood(mood)
+
+            // Save the mood object to your backend using Retrofit
+            RetrofitClient.api.createMood(mood).enqueue(object : Callback<Mood> {
+                override fun onResponse(call: Call<Mood>, response: Response<Mood>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@MoodTrackingActivity, "Mood saved successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@MoodTrackingActivity, "Failed to save mood", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Mood>, t: Throwable) {
+                    Toast.makeText(this@MoodTrackingActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
 
-        //Test and show the mood entity
-        if (savedMoods.isNotEmpty()) {
-            val message = savedMoods.joinToString(separator = "\n") { "Mood: ${it.moodType}, Date: ${it.date}" }
-            Toast.makeText(this, "Saved Moods:\n$message", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, "No moods selected to save.", Toast.LENGTH_SHORT).show()
-        }
+        // Show the mood entity in a toast
+//        if (savedMoods.isNotEmpty()) {
+//            val message = savedMoods.joinToString(separator = "\n") { "Mood: ${it.moodType}, Date: ${it.date}" }
+//            Toast.makeText(this, "Saved Moods:\n$message", Toast.LENGTH_LONG).show()
+//        } else {
+//            Toast.makeText(this, "No moods selected to save.", Toast.LENGTH_SHORT).show()
+//        }
 
         resetAllSelections()
     }
