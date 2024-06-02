@@ -1,4 +1,4 @@
-package com.example.calmcloud.subpage
+package com.example.calmcloud
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calmcloud.subpage.MoodTrackingActivity
-import com.example.calmcloud.R
 
 class SplashActivity : AppCompatActivity() {
 
@@ -27,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
 
         // Navigate to the main activity after the splash duration
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MoodTrackingActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, splashDuration)
     }
