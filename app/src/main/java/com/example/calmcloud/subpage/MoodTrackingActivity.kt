@@ -102,15 +102,6 @@ class MoodTrackingActivity : AppCompatActivity() {
                 }
             })
         }
-
-        // Show the mood entity in a toast
-//        if (savedMoods.isNotEmpty()) {
-//            val message = savedMoods.joinToString(separator = "\n") { "Mood: ${it.moodType}, Date: ${it.date}" }
-//            Toast.makeText(this, "Saved Moods:\n$message", Toast.LENGTH_LONG).show()
-//        } else {
-//            Toast.makeText(this, "No moods selected to save.", Toast.LENGTH_SHORT).show()
-//        }
-
         resetAllSelections()
     }
 
