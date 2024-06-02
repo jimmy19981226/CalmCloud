@@ -6,11 +6,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RatingBar
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calmcloud.R
+import com.example.calmcloud.entity.Sleep
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SleepPatternsActivity : AppCompatActivity() {
     private lateinit var startTimeSpinner: Spinner
@@ -18,6 +22,7 @@ class SleepPatternsActivity : AppCompatActivity() {
     private lateinit var sleepQuality: RatingBar
     private lateinit var sleepFactors: EditText
     private lateinit var resetButton: Button
+    private lateinit var saveButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +40,7 @@ class SleepPatternsActivity : AppCompatActivity() {
         sleepQuality = findViewById(R.id.sleepQuality)
         sleepFactors = findViewById(R.id.sleepFactors)
         resetButton = findViewById(R.id.resetButton)
+        saveButton = findViewById(R.id.saveButton)
 
         // Populate the spinners with time values
         val timeList = generateTimeList()
@@ -46,6 +52,11 @@ class SleepPatternsActivity : AppCompatActivity() {
         // Set up the reset button click listener
         resetButton.setOnClickListener {
             resetAllFields()
+        }
+
+        // Set up the save button click listener
+        saveButton.setOnClickListener {
+            saveSelections()
         }
     }
 
@@ -66,5 +77,26 @@ class SleepPatternsActivity : AppCompatActivity() {
         endTimeSpinner.setSelection(0)
         sleepQuality.rating = 0f
         sleepFactors.text.clear()
+    }
+
+    private fun saveSelections() {
+        val date = SimpleDateFormat("MM-dd-yyyy", Locale.US).format(Date())
+        val startTime = startTimeSpinner.selectedItem.toString()
+        val endTime = endTimeSpinner.selectedItem.toString()
+        val quality = sleepQuality.rating.toInt()
+        val factors = sleepFactors.text.toString()
+
+        if (startTime.isNotBlank() && endTime.isNotBlank() && factors.isNotBlank()) {
+            val sleep = Sleep(UUID.randomUUID().toString(), date, startTime, endTime, quality, factors)
+            // Save the sleep object to your database or backend here
+            // Example: database.saveSleep(sleep)
+
+            val message = "Saved Sleep Data:\nDate: ${sleep.date}\nStart: ${sleep.sleepDurationStart}\nEnd: ${sleep.sleepDurationEnd}\nQuality: ${sleep.sleepQuality}\nFactors: ${sleep.sleepFactors}"
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+
+            resetAllFields()
+        } else {
+            Toast.makeText(this, "Please fill out all fields to save the data.", Toast.LENGTH_SHORT).show()
+        }
     }
 }
