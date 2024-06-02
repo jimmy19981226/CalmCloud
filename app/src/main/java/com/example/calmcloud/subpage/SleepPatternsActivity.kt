@@ -97,7 +97,7 @@ class SleepPatternsActivity : AppCompatActivity() {
             RetrofitClient.api.createSleepData(sleep).enqueue(object : Callback<Sleep> {
                 override fun onResponse(call: Call<Sleep>, response: Response<Sleep>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(this@SleepPatternsActivity, "Sleep data saved successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SleepPatternsActivity, "Sleep patterns data saved successfully", Toast.LENGTH_SHORT).show()
                         resetAllFields()
                     } else {
                         Toast.makeText(this@SleepPatternsActivity, "Failed to save sleep data", Toast.LENGTH_SHORT).show()

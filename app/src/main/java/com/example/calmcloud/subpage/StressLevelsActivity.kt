@@ -9,8 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calmcloud.R
+import com.example.calmcloud.api.RetrofitClient
 import com.example.calmcloud.entity.StressLevel
 import com.example.calmcloud.entity.StressLevelType
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,17 +59,24 @@ class StressLevelsActivity : AppCompatActivity() {
 
     private fun saveSelections() {
         if (selectedStressLevels.isNotEmpty()) {
-            val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+            val date = SimpleDateFormat("MM-dd-yyyy", Locale.US).format(Date())
             val stressLevel = StressLevel(UUID.randomUUID().toString(), date, selectedStressLevels.toList())
 
-            // Show a toast with the details
-            val message = selectedStressLevels.joinToString(separator = "\n") { it.name }
-            Toast.makeText(this, "Saved Stress Levels:\n$message", Toast.LENGTH_LONG).show()
+            // Save the stress level object to your database or backend here using Retrofit
+            RetrofitClient.api.createStressLevel(stressLevel).enqueue(object : Callback<StressLevel> {
+                override fun onResponse(call: Call<StressLevel>, response: Response<StressLevel>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@StressLevelsActivity, "Stress levels data saved successfully", Toast.LENGTH_SHORT).show()
+                        resetAllSelections(findViewById(R.id.stressLevelsList))
+                    } else {
+                        Toast.makeText(this@StressLevelsActivity, "Failed to save stress levels", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-            // Save the stress level object to your database or backend here
-            // Example: database.saveStressLevel(stressLevel)
-
-            resetAllSelections(findViewById(R.id.stressLevelsList))
+                override fun onFailure(call: Call<StressLevel>, t: Throwable) {
+                    Toast.makeText(this@StressLevelsActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
         } else {
             Toast.makeText(this, "No stress levels selected to save.", Toast.LENGTH_SHORT).show()
         }
