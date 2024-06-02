@@ -38,6 +38,9 @@
             </intent-filter>
         </activity>
 
+        <!-- Data Visualization Activity -->
+        <activity android:name=".subpage.DataVisualizationActivity" />
+
         <!-- Sleep Patterns Activity -->
         <activity
             android:name=".subpage.SleepPatternsActivity"
