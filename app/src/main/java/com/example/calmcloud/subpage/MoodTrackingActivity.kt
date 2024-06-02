@@ -1,13 +1,17 @@
 package com.example.calmcloud.subpage
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calmcloud.R
 import android.widget.Button
 import android.widget.ImageButton
-
+import com.example.calmcloud.entity.Mood
+import com.example.calmcloud.entity.MoodType
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MoodTrackingActivity : AppCompatActivity() {
 
@@ -41,6 +45,7 @@ class MoodTrackingActivity : AppCompatActivity() {
             button.setOnClickListener { toggleMoodSelection(button) }
         }
 
+        findViewById<Button>(R.id.saveButton).setOnClickListener { saveSelections() }
         findViewById<Button>(R.id.resetButton).setOnClickListener { resetAllSelections() }
     }
 
@@ -57,6 +62,39 @@ class MoodTrackingActivity : AppCompatActivity() {
     private fun resetAllSelections() {
         selectedMoods.clear()
         moodButtons.forEach { it.alpha = 1.0f }
+    }
+
+    private fun saveSelections() {
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        val savedMoods = mutableListOf<Mood>()
+        selectedMoods.forEach { id ->
+            val moodType = when (id) {
+                R.id.happyButton -> MoodType.HAPPY
+                R.id.thankfulButton -> MoodType.THANKFUL
+                R.id.energeticButton -> MoodType.ENERGETIC
+                R.id.calmButton -> MoodType.CALM
+                R.id.indifferentButton -> MoodType.INDIFFERENT
+                R.id.tiredButton -> MoodType.TIRED
+                R.id.sadButton -> MoodType.SAD
+                R.id.anxiousButton -> MoodType.ANXIOUS
+                R.id.angryButton -> MoodType.ANGRY
+                else -> return@forEach
+            }
+            val mood = Mood(UUID.randomUUID().toString(), date, moodType)
+            savedMoods.add(mood)
+            // Save the mood object to your database or backend here
+            // Example: database.saveMood(mood)
+        }
+
+        //Test and show the mood entity
+        if (savedMoods.isNotEmpty()) {
+            val message = savedMoods.joinToString(separator = "\n") { "Mood: ${it.moodType}, Date: ${it.date}" }
+            Toast.makeText(this, "Saved Moods:\n$message", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, "No moods selected to save.", Toast.LENGTH_SHORT).show()
+        }
+
+        resetAllSelections()
     }
 
     private fun enableEdgeToEdge() {
