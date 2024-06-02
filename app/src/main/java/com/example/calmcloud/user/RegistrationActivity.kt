@@ -26,7 +26,7 @@ class RegistrationActivity : AppCompatActivity() {
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                 if (password == confirmPassword) {
-                    registerUser(email, password)
+                    checkApiRegister(email, password)
                 } else {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 }
@@ -34,6 +34,22 @@ class RegistrationActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun checkApiRegister(email: String, password: String) {
+        RetrofitClient.api.checkApi().enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    registerUser(email, password)
+                } else {
+                    Toast.makeText(this@RegistrationActivity, "API is down, please try again later", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@RegistrationActivity, "API is down, please try again later", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun registerUser(email: String, password: String) {

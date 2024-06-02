@@ -27,8 +27,8 @@ class LoginActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.etPassword).text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                // Perform login and navigate to the main activity
-                loginUser(email, password)
+                // Perform API health check and then login
+                checkApiLogin(email, password)
             } else {
                 Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
@@ -40,6 +40,22 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegistrationActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun checkApiLogin(email: String, password: String) {
+        RetrofitClient.api.checkApi().enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    loginUser(email, password)
+                } else {
+                    Toast.makeText(this@LoginActivity, "API is down, please try again later", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(this@LoginActivity, "API is down, please try again later", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun loginUser(email: String, password: String) {

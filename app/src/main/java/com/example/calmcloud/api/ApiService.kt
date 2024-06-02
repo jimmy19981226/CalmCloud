@@ -11,6 +11,9 @@ import retrofit2.http.POST
 
 interface ApiService {
 
+    @GET("api")
+    fun checkApi(): Call<Void>
+
     @POST("login")
     fun loginUser(@Body user: User): Call<User>
 
