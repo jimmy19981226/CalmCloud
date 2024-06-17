@@ -4,4 +4,7 @@
     <string name="stress_levels">Stress Levels</string>
     <string name="sleep_patterns">Sleep Patterns</string>
     <string name="data_visualization">Data Visualization</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
+
