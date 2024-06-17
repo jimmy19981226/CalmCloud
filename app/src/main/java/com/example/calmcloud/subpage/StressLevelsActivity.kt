@@ -51,10 +51,33 @@ class StressLevelsActivity : AppCompatActivity() {
         }
 
         // Set OnClickListener for the Save Button
-        findViewById<Button>(R.id.saveButton).setOnClickListener { saveSelections() }
+        findViewById<Button>(R.id.saveButton).setOnClickListener { checkAndSaveSelections() }
 
         // Set OnClickListener for the Reset Button
         findViewById<Button>(R.id.resetButton).setOnClickListener { resetAllSelections(stressLevelsList) }
+    }
+
+    private fun checkAndSaveSelections() {
+        val date = SimpleDateFormat("MM-dd-yyyy", Locale.US).format(Date())
+
+        RetrofitClient.api.getStressLevels().enqueue(object : Callback<List<StressLevel>> {
+            override fun onResponse(call: Call<List<StressLevel>>, response: Response<List<StressLevel>>) {
+                if (response.isSuccessful) {
+                    val existingEntry = response.body()?.find { it.date == date }
+                    if (existingEntry != null) {
+                        Toast.makeText(this@StressLevelsActivity, "You have already recorded stress for today.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        saveSelections()
+                    }
+                } else {
+                    Toast.makeText(this@StressLevelsActivity, "Failed to check existing stress levels.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<StressLevel>>, t: Throwable) {
+                Toast.makeText(this@StressLevelsActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun saveSelections() {
