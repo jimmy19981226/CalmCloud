@@ -60,7 +60,7 @@ class SleepPatternsActivity : AppCompatActivity() {
 
         // Set up the save button click listener
         saveButton.setOnClickListener {
-            saveSelections()
+            checkAndSaveSelections()
         }
     }
 
@@ -81,6 +81,29 @@ class SleepPatternsActivity : AppCompatActivity() {
         endTimeSpinner.setSelection(0)
         sleepQuality.rating = 0f
         sleepFactors.text.clear()
+    }
+
+    private fun checkAndSaveSelections() {
+        val date = SimpleDateFormat("MM-dd-yyyy", Locale.US).format(Date())
+
+        RetrofitClient.api.getSleepData().enqueue(object : Callback<List<Sleep>> {
+            override fun onResponse(call: Call<List<Sleep>>, response: Response<List<Sleep>>) {
+                if (response.isSuccessful) {
+                    val existingEntry = response.body()?.find { it.date == date }
+                    if (existingEntry != null) {
+                        Toast.makeText(this@SleepPatternsActivity, "You have already recorded sleep data for today.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        saveSelections()
+                    }
+                } else {
+                    Toast.makeText(this@SleepPatternsActivity, "Failed to check existing sleep data.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Sleep>>, t: Throwable) {
+                Toast.makeText(this@SleepPatternsActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun saveSelections() {
