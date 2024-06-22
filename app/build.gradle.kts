@@ -49,6 +49,8 @@ dependencies {
 
     // OkHttp dependencies (Retrofit internally uses OkHttp for networking)
     implementation ("com.squareup.okhttp3:okhttp:3.14.9")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

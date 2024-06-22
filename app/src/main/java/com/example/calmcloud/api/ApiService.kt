@@ -1,12 +1,10 @@
 package com.example.calmcloud.api
 
-import com.example.calmcloud.entity.Mood
-import com.example.calmcloud.entity.Sleep
-import com.example.calmcloud.entity.StressLevel
-import com.example.calmcloud.entity.User
+import com.example.calmcloud.entity.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface ApiService {
@@ -37,4 +35,8 @@ interface ApiService {
 
     @POST("sleep")
     fun createSleepData(@Body sleep: Sleep): Call<Sleep>
+
+    @Headers("Content-Type: application/json")
+    @POST("v1/chat/completions")
+    fun getChatCompletion(@Body request: OpenAIChatRequest): Call<OpenAIChatResponse>
 }
