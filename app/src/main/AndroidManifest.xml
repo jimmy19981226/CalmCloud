@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Internet permission -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Optional: To allow access to network state -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Optional: To allow access to network state -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -17,51 +16,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalmCloud"
         tools:targetApi="31">
-
+        <activity
+            android:name=".subpage.ChatBotActivity"
+            android:exported="false" />
         <!-- Login Activity -->
         <activity
             android:name=".user.LoginActivity"
-            android:exported="true" />
-
-        <!-- Registration Activity -->
+            android:exported="true" /> <!-- Registration Activity -->
         <activity
             android:name=".user.RegistrationActivity"
-            android:exported="true" />
-
-        <!-- Splash Activity -->
+            android:exported="true" /> <!-- Splash Activity -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Data Visualization Activity -->
-        <activity android:name=".subpage.DataVisualizationActivity" />
-
-        <!-- Sleep Patterns Activity -->
+        </activity> <!-- Data Visualization Activity -->
+        <activity android:name=".subpage.DataVisualizationActivity" /> <!-- Sleep Patterns Activity -->
         <activity
             android:name=".subpage.SleepPatternsActivity"
-            android:exported="true" />
-
-        <!-- Stress Levels Activity -->
+            android:exported="true" /> <!-- Stress Levels Activity -->
         <activity
             android:name=".subpage.StressLevelsActivity"
-            android:exported="true" />
-
-        <!-- Mood Tracking Activity -->
+            android:exported="true" /> <!-- Mood Tracking Activity -->
         <activity
             android:name=".subpage.MoodTrackingActivity"
-            android:exported="true" />
-
-        <!-- Main Activity -->
+            android:exported="true" /> <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
