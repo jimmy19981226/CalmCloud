@@ -1,4 +1,4 @@
-package com.example.calmcloud.subpage
+package com.example.calmcloud.subpage.chatbot
 
 data class ChatMessage(
     val message: String,

@@ -1,4 +1,4 @@
-package com.example.calmcloud.subpage
+package com.example.calmcloud.subpage.chatbot
 
 import android.os.Bundle
 import android.widget.Button
@@ -6,8 +6,8 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calmcloud.api.Message
 import com.example.calmcloud.R
+import com.example.calmcloud.api.Message
 import com.example.calmcloud.api.OpenAIChatRequest
 import com.example.calmcloud.api.OpenAIChatResponse
 import com.example.calmcloud.api.RetrofitClient
@@ -52,9 +52,16 @@ class ChatBotActivity : AppCompatActivity() {
     }
 
     private fun sendMessageToChatbot(userInput: String) {
+        val chatHistory = messages.map {
+            Message(
+                role = if (it.isUser) "user" else "assistant",
+                content = it.message
+            )
+        }
+
         val request = OpenAIChatRequest(
             model = "gpt-3.5-turbo",
-            messages = listOf(Message(role = "user", content = userInput))
+            messages = chatHistory + Message(role = "user", content = userInput)
         )
 
         RetrofitClient.openAiApi.getChatCompletion(request).enqueue(object : Callback<OpenAIChatResponse> {

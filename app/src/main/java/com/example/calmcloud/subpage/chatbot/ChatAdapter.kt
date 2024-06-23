@@ -1,4 +1,4 @@
-package com.example.calmcloud.subpage
+package com.example.calmcloud.subpage.chatbot
 
 import android.view.LayoutInflater
 import android.view.View
