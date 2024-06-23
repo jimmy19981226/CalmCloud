@@ -32,13 +32,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message" />
+            android:hint="Message ChatBot"
+            android:background="@drawable/xml_edit_text_background"
+            android:padding="12dp"
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send" />
+            android:text="Send"
+            android:backgroundTint="@color/buttonColor"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:drawablePadding="8dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:id="@+id/botMessageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bot_message_background"
+        android:background="@drawable/xml_bot_message_background"
         android:padding="12dp"
         android:textColor="@android:color/black"
         android:text="Bot message" />
