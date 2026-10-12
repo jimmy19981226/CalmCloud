@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
+// Endpoint URLs are configuration; provider credentials stay on a server.
+fun quotedProperty(name: String, defaultValue: String): String {
+    val value = providers.gradleProperty(name).orElse(defaultValue).get()
+    return "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
+}
+
 android {
     namespace = "com.example.calmcloud"
     compileSdk = 34
@@ -15,7 +21,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BACKEND_BASE_URL", quotedProperty("CALMCLOUD_API_BASE_URL", "http://10.0.2.2:3000/"))
+        buildConfigField("String", "CHAT_BASE_URL", quotedProperty("CALMCLOUD_CHAT_BASE_URL", ""))
+        buildConfigField("String", "CHAT_MODEL", quotedProperty("CALMCLOUD_CHAT_MODEL", "gpt-3.5-turbo"))
     }
+
+    buildFeatures { buildConfig = true }
 
     buildTypes {
         release {
@@ -36,7 +47,6 @@ android {
 }
 
 dependencies {
-    implementation ("com.google.android.material:material:1.4.0")
 
     implementation ("androidx.gridlayout:gridlayout:1.0.0")
 
@@ -48,7 +58,6 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // OkHttp dependencies (Retrofit internally uses OkHttp for networking)
-    implementation ("com.squareup.okhttp3:okhttp:3.14.9")
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
 

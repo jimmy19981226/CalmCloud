@@ -3,12 +3,12 @@ package com.example.calmcloud.subpage.chatbot
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calmcloud.R
-import com.example.calmcloud.api.Message
-import com.example.calmcloud.api.OpenAIChatRequest
+import com.example.calmcloud.BuildConfig
 import com.example.calmcloud.api.OpenAIChatResponse
 import com.example.calmcloud.api.RetrofitClient
 import retrofit2.Call
@@ -22,6 +22,7 @@ class ChatBotActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var sendButton: Button
     private lateinit var userInputEditText: EditText
+    private var activeCall: Call<OpenAIChatResponse>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +37,14 @@ class ChatBotActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         sendButton.setOnClickListener {
-            val userInput = userInputEditText.text.toString()
+            if (!RetrofitClient.isChatConfigured) {
+                Toast.makeText(this, R.string.chat_not_configured, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            val userInput = userInputEditText.text.toString().trim()
             if (userInput.isNotBlank()) {
                 addMessage(userInput, true)
-                sendMessageToChatbot(userInput)
+                sendMessageToChatbot()
                 userInputEditText.text.clear()
             }
         }
@@ -51,32 +56,37 @@ class ChatBotActivity : AppCompatActivity() {
         recyclerView.scrollToPosition(messages.size - 1)
     }
 
-    private fun sendMessageToChatbot(userInput: String) {
-        val chatHistory = messages.map {
-            Message(
-                role = if (it.isUser) "user" else "assistant",
-                content = it.message
-            )
-        }
-
-        val request = OpenAIChatRequest(
-            model = "gpt-3.5-turbo",
-            messages = chatHistory + Message(role = "user", content = userInput)
-        )
-
-        RetrofitClient.openAiApi.getChatCompletion(request).enqueue(object : Callback<OpenAIChatResponse> {
+    private fun sendMessageToChatbot() {
+        val request = buildChatRequest(messages, BuildConfig.CHAT_MODEL)
+        sendButton.isEnabled = false
+        val call = RetrofitClient.openAiApi.getChatCompletion(request)
+        activeCall = call
+        call.enqueue(object : Callback<OpenAIChatResponse> {
             override fun onResponse(call: Call<OpenAIChatResponse>, response: Response<OpenAIChatResponse>) {
-                if (response.isSuccessful) {
-                    val botResponse = response.body()?.choices?.firstOrNull()?.message?.content ?: "No response"
+                if (isFinishing || isDestroyed) return
+                activeCall = null
+                sendButton.isEnabled = true
+                val botResponse = response.body()?.choices?.firstOrNull()?.message?.content
+                if (response.isSuccessful && !botResponse.isNullOrBlank()) {
                     addMessage(botResponse, false)
                 } else {
-                    addMessage("Error: ${response.errorBody()?.string()}", false)
+                    response.errorBody()?.close()
+                    Toast.makeText(this@ChatBotActivity, R.string.chat_response_error, Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<OpenAIChatResponse>, t: Throwable) {
-                addMessage("Error: ${t.message}", false)
+                if (call.isCanceled || isFinishing || isDestroyed) return
+                activeCall = null
+                sendButton.isEnabled = true
+                Toast.makeText(this@ChatBotActivity, R.string.chat_network_error, Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    override fun onDestroy() {
+        activeCall?.cancel()
+        activeCall = null
+        super.onDestroy()
     }
 }

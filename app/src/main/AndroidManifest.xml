@@ -22,10 +22,10 @@
         <!-- Login Activity -->
         <activity
             android:name=".user.LoginActivity"
-            android:exported="true" /> <!-- Registration Activity -->
+            android:exported="false" /> <!-- Registration Activity -->
         <activity
             android:name=".user.RegistrationActivity"
-            android:exported="true" /> <!-- Splash Activity -->
+            android:exported="false" /> <!-- Splash Activity -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -38,13 +38,13 @@
         <activity android:name=".subpage.DataVisualizationActivity" /> <!-- Sleep Patterns Activity -->
         <activity
             android:name=".subpage.SleepPatternsActivity"
-            android:exported="true" /> <!-- Stress Levels Activity -->
+            android:exported="false" /> <!-- Stress Levels Activity -->
         <activity
             android:name=".subpage.StressLevelsActivity"
-            android:exported="true" /> <!-- Mood Tracking Activity -->
+            android:exported="false" /> <!-- Mood Tracking Activity -->
         <activity
             android:name=".subpage.MoodTrackingActivity"
-            android:exported="true" /> <!-- Main Activity -->
+            android:exported="false" /> <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="false">
