@@ -30,7 +30,7 @@ CalmCloud explores how structured self-reporting and a conversational interface 
 ## Architecture
 
 ```mermaid
-flowchart LR
+flowchart TB
     U[Android screens and forms] --> R[Retrofit API interfaces]
     R --> B[External wellness backend]
     B --> D[Daily records]
