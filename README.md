@@ -13,7 +13,7 @@ A Kotlin application combining daily wellness check-ins, visual summaries, and a
 ![Android](https://img.shields.io/badge/Android-API%2024%2B-3DDC84?logo=android&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-client%20prototype-8759C7)
 
-[Features](#experience) · [Architecture](#architecture) · [Setup](#build-and-run) · [API contract](docs/API_CONTRACT.md) · [Tests](#verification)
+[Review guide](#review-guide) · [Features](#experience) · [Architecture](#architecture) · [Setup](#build-and-run) · [API contract](docs/API_CONTRACT.md) · [Tests](#verification)
 
 </div>
 
@@ -26,6 +26,20 @@ CalmCloud explores how structured self-reporting and a conversational interface 
 | Mood selection, sleep times and quality, stress levels | Mood/stress charts and a sleep history list | Conversation history sent to a configured chat-completions proxy |
 
 **Repository scope:** This repository contains the Android client. Its REST backend and chat proxy are separate dependencies and are **not bundled**. The client can be built independently; login, persistence, and chat require compatible services. This is a learning/prototype project for self-reflection, with no clinical validation.
+
+## Review guide
+
+Start with the [API contract](docs/API_CONTRACT.md) to see the client/backend boundary, then follow [ChatBotActivity.kt](app/src/main/java/com/example/calmcloud/subpage/chatbot/ChatBotActivity.kt) → [ChatRequests.kt](app/src/main/java/com/example/calmcloud/subpage/chatbot/ChatRequests.kt) → [request tests](app/src/test/java/com/example/calmcloud/subpage/chatbot/ChatRequestsTest.kt).
+
+A concrete regression case: for the conversation `user: Hello → assistant: Welcome → user: Thanks`, the outgoing request must preserve all three messages in order and include the newest message once. The request builder is a pure mapping that can be tested without an emulator, backend, or model credential.
+
+| Decision | Benefit and current tradeoff |
+| :--- | :--- |
+| Keep request construction separate from the activity | Message ordering and roles can be checked in JVM tests; screen lifecycle still needs device-level validation. |
+| Disable send during a request and cancel on activity destruction | Prevents overlapping submissions and callbacks into a destroyed screen; conversation state remains in memory. |
+| Configure a developer-operated chat proxy | Provider credentials stay outside the APK; proxy authentication is still an integration requirement. |
+
+**Try without backend services:** follow [build setup](#build-and-run), then run `bash ./gradlew testDebugUnitTest`. A complete mood-entry or chat demo requires the external services described below.
 
 ## Architecture
 
@@ -49,7 +63,7 @@ flowchart TB
 | AI integration | Chat-completions request contract, ordered conversation context, configurable proxy/model |
 | Build | Gradle Kotlin DSL, version catalog, JUnit, GitHub Actions |
 
-The chat request builder keeps the latest user message in the payload exactly once. The UI prevents overlapping submissions, cancels an in-flight call when its activity is destroyed, and displays service errors separately from model conversation history. Request-body logging is disabled so wellness entries and chat text are not written into HTTP logs.
+Service errors are displayed separately from model conversation history. Request-body logging is disabled so wellness entries and chat text are not written into HTTP logs.
 
 ## Build and run
 
